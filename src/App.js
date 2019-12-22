@@ -1,9 +1,9 @@
 import React from 'react';
-import Login from './Login.js';
+import Chart from './Chart.js';
 
 function App() {
   return (
-      <Login />
+      <Chart />
   );
 }
 

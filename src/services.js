@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const routes = {
-    login: 'http://localhost:9000/login'
+    base: 'https://2jdg5klzl0.execute-api.us-west-1.amazonaws.com/default/EmployeesChart-Api'
 };
 
-export const loginService = (payload) => {
-    return axios.post(routes.login, payload)
+export const getEmployeesByManagerId = (id) => {
+    return axios.get(`${routes.base}?manager=${id}`)
 };

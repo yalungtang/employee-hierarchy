@@ -1,11 +1,11 @@
 import { createActions } from 'redux-actions';
-import { LOGIN } from './constants';
-import { loginService } from './services';
+import { GET_EMPLOYEES_BY_MANAGER_ID } from './constants';
+import { getEmployeesByManagerId as getEmployeesByManagerIdApi } from './services';
 
-export const { login } = createActions(LOGIN);
+export const { getEmployeesByManagerId } = createActions(GET_EMPLOYEES_BY_MANAGER_ID);
 
-export const dispatchLogin = (payload, callback) => {
-    return dispatch => dispatch(login(loginService(payload))).catch(
-        callback
-    );
+export const dispatchGetEmployeesByManager = (id) => {
+    return dispatch => {
+        dispatch(getEmployeesByManagerId(getEmployeesByManagerIdApi(id)))
+    }
 };
