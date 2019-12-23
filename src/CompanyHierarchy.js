@@ -10,6 +10,7 @@ const CompanyHierarchy = (props) => {
     childrenArray.forEach((employee) => {
       const node = (
         <TreeNode
+          key={employee.id}
           label={
             <Employee
               onClick={() => props.getEmployeesByManager(employee.id)}

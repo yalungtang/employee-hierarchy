@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Avatar, Menu, Dropdown, Icon, Modal, Spin } from 'antd';
+import { Avatar, Menu, Dropdown, Icon, Modal, Spin, Button } from 'antd';
 
 const Employee = (props) => {
   const [shouldShowDetails, showDetails] = useState(false);
@@ -7,14 +7,14 @@ const Employee = (props) => {
   const menu = (
     <Menu>
       <Menu.Item>
-        <a href="#" onClick={onClick}>
+        <Button type="link" onClick={onClick}>
           See {employee.first}'s team
-        </a>
+        </Button>
       </Menu.Item>
       <Menu.Item>
-        <a href="#" onClick={() => showDetails(true)}>
+        <Button type="link" onClick={() => showDetails(true)}>
           See {employee.first}'s details
-        </a>
+        </Button>
       </Menu.Item>
     </Menu>
   );
@@ -40,13 +40,13 @@ const Employee = (props) => {
       <Avatar icon="user" />
       <br />
       <Dropdown overlay={menu}>
-        <a className="ant-dropdown-link" href="#">
+        <Button type="link" style={{ marginBottom: '25px' }}>
           {employee.first}
           <br />
           {employee.last}
           <br />
           {isLoading ? <Spin /> : <Icon type="down" />}
-        </a>
+        </Button>
       </Dropdown>
     </div>
   );

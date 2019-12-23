@@ -6,7 +6,7 @@ import { appReducer } from './reducers';
 
 let middleware = [thunk, promiseMiddleware];
 let glob = typeof window !== "undefined" ? window : global;
-const devToolsExtension = glob.devToolsExtension;
+const devToolsExtension = glob.__REDUX_DEVTOOLS_EXTENSION__;
 
 export default createStore(
   appReducer,
