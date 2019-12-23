@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Layout, Spin } from 'antd';
+import { Layout } from 'antd';
 import { dispatchGetEmployeesByManager } from './actions';
 import CompanyHierarchy from './CompanyHierarchy';
 const { Header, Footer, Content } = Layout;
@@ -20,11 +20,11 @@ class Home extends React.Component {
         </Header>
         <Content style={{ padding: '0 50px' }}>
           <div className="main-content">
-            {!isLoading && <CompanyHierarchy
+            <CompanyHierarchy
               getEmployeesByManager={getEmployeesByManager}
               employees={employees}
-            />}
-            {isLoading && <Spin />}
+              isLoading={isLoading}
+            />
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>The Company ©2019 Created by Yalung Tang</Footer>

@@ -20,14 +20,14 @@ const init = handleActions({
       isLoading: false
     };
   },
-  [GET_EMPLOYEES_BY_MANAGER_ID_REJECTED]: (state, action) => {
+  [GET_EMPLOYEES_BY_MANAGER_ID_REJECTED]: (state, _action) => {
     return {
       ...state,
       error: true,
       isLoading: false
     };
   },
-  [GET_EMPLOYEES_BY_MANAGER_ID_PENDING]: (state, action) => {
+  [GET_EMPLOYEES_BY_MANAGER_ID_PENDING]: (state, _action) => {
     return {
       ...state,
       error: false,
@@ -37,7 +37,8 @@ const init = handleActions({
 }, {
   error: false,
   isLoading: false,
-  employees: []
+  employees: [],
+  notManagerIds: []
 });
 
 export const appReducer = combineReducers({

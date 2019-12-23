@@ -14,6 +14,8 @@ const CompanyHierarchy = (props) => {
             <Employee
               onClick={() => props.getEmployeesByManager(employee.id)}
               employee={employee}
+              manager={props.employees.find(employee => employee.id === managerId)}
+              isLoading={props.isLoading}
             />
           }
         >

@@ -1,31 +1,53 @@
-import React from 'react';
-import { Avatar, Icon, Popover, Descriptions } from 'antd';
-
-const SingleEmployee = (props) => {
-  return (
-    <Descriptions title="Employee info">
-      <Descriptions.Item label="Full name">{props.first} {props.last}</Descriptions.Item>
-      <Descriptions.Item label="Department">{props.department}</Descriptions.Item>
-      <Descriptions.Item label="ID">{props.id}</Descriptions.Item>
-    </Descriptions>
-  )
-};
+import React, { useState } from 'react';
+import { Avatar, Menu, Dropdown, Icon, Modal, Spin } from 'antd';
 
 const Employee = (props) => {
-  const { employee, onClick } = props;
+  const [shouldShowDetails, showDetails] = useState(false);
+  const { employee, onClick, manager, isLoading } = props;
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <a href="#" onClick={onClick}>
+          See {employee.first}'s team
+        </a>
+      </Menu.Item>
+      <Menu.Item>
+        <a href="#" onClick={() => showDetails(true)}>
+          See {employee.first}'s details
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
   return (
-    <div onClick={onClick}>
-      <Popover content={<SingleEmployee {...employee} />}>
-        <Avatar icon="user" />
-        <br />
-        <a href="#">
+    <div>
+      {shouldShowDetails && (<Modal
+          title={`${employee.first} ${employee.last}`}
+          visible={shouldShowDetails}
+          onOk={() => showDetails(false)}
+          onCancel={() => showDetails(false)}
+        >
+          <p><Avatar size={100} icon="user" /></p>
+          {manager && <p>
+            <strong>Manager:</strong> {manager.first} {manager.last}
+          </p>}
+          <p>
+            <strong>Department:</strong> {employee.department}
+          </p>
+          <p>
+            <strong>Id:</strong> {employee.id}
+          </p>
+        </Modal>)}
+      <Avatar icon="user" />
+      <br />
+      <Dropdown overlay={menu}>
+        <a className="ant-dropdown-link" href="#">
           {employee.first}
           <br />
           {employee.last}
           <br />
-          <Icon type="down" />
+          {isLoading ? <Spin /> : <Icon type="down" />}
         </a>
-      </Popover>
+      </Dropdown>
     </div>
   );
 };
