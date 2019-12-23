@@ -1,7 +1,10 @@
 
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
-import { GET_EMPLOYEES_BY_MANAGER_ID_FULFILLED, GET_EMPLOYEES_BY_MANAGER_ID_REJECTED } from './constants';
+import { GET_EMPLOYEES_BY_MANAGER_ID_FULFILLED,
+  GET_EMPLOYEES_BY_MANAGER_ID_REJECTED,
+  GET_EMPLOYEES_BY_MANAGER_ID_PENDING
+} from './constants';
 
 const mergeEmployees = (fromState, newArray) => {
   const update = newArray.filter((element) => !fromState.find(stateElement => stateElement.id === element.id));
@@ -11,21 +14,29 @@ const mergeEmployees = (fromState, newArray) => {
 const init = handleActions({
   [GET_EMPLOYEES_BY_MANAGER_ID_FULFILLED]: (state, action) => {
     const { data: employees } = action.payload;
-    console.log(state.employees)
     return {
       employees: mergeEmployees(state.employees, employees),
       error: false,
-      loadSuccess: true
+      isLoading: false
     };
   },
   [GET_EMPLOYEES_BY_MANAGER_ID_REJECTED]: (state, action) => {
     return {
-      error: true
+      ...state,
+      error: true,
+      isLoading: false
+    };
+  },
+  [GET_EMPLOYEES_BY_MANAGER_ID_PENDING]: (state, action) => {
+    return {
+      ...state,
+      error: false,
+      isLoading: true
     };
   },
 }, {
   error: false,
-  loadSuccess: false,
+  isLoading: false,
   employees: []
 });
 

@@ -1,5 +1,9 @@
 @import '~antd/dist/antd.css';
-@import './chart.css';
+@import './home.css';
+
+#root {
+  height: 100%;
+}
 
 body {
   margin: 0;
